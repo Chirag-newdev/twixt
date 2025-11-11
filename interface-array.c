@@ -7,8 +7,8 @@
 #define SIZE 24 
 #define tw "\n\033[1B\033[1D"
 #define kw "\033[1B\033[1D"
-char arr[SIZE][SIZE];
-
+char arr[SIZE][SIZE]={0};
+bool state[SIZE+1][SIZE+1]={0};
 void init()
 {
     char(*ptr)[] = arr;
@@ -41,7 +41,7 @@ int pin(char z)
 {
     int x,y;
     printf("Player :%c, please enter row and comumn of your move in format:\"row column\"\n\033[2K",z);
-    scanf(" %d %d",&x,&y);
+    if(scanf(" %d %d",&x,&y)!=2)return -10;
     if((x<0||x>=SIZE) || (y<0||y>=SIZE))
     {
         printf("\0337");
@@ -54,6 +54,7 @@ int pin(char z)
     {
         arr[x][y]=z;
         printf("\0337");
+        printf("\033[r\033[H");
         printf("\033[%d;%dH", 2*x+2,4+y*4);
         printf("%c",z);
         fflush(stdout);
@@ -67,6 +68,47 @@ int pin(char z)
         return -1;
     }
 }
+void block(int x,int y,int dx,int dy)
+{
+    if(dx==1)
+    {
+        {
+            state[x+1][y]=state[x+1][y+dy/2]=1;
+        }
+    }
+    else if(dx==-1)
+    {
+        x--;
+        state[x+1][y]=state[x+1][y+dy/2]=1;
+    }
+    else if(dx==2)
+    {
+        if(dy==1)state[x+dx/2][y]=state[x][y]=1;
+    }
+    else state[x+dx/2][y]=state[x][y]=1;
+}
+bool check(int x,int y,int dx,int dy)
+{
+    if (dx == 1)
+    {
+        if (state[x+1][y] || state[x+1][y+dy/2]) return false;
+    }
+    else if (dx == -1)
+    {
+        if (state[x][y] || state[x][y+dy/2]) return false;
+    }
+    else if (dx == 2)
+    {
+        if (state[x+1][y] || state[x+1][y+dy/2]) return false;
+    }
+    else if (dx == -2)
+    {
+        if (state[x-1][y] || state[x-1][y+dy/2]) return false;
+    }
+    block(x, y, dx, dy);
+    return true;
+}
+
 void viable(int x,int y)
 {
     char a[8][2]={{x+2,y+1},{x+1,y+2},{x+2,y-1},{x+1,y-2},{x-1,y-2},{x-2,y-1},{x-2,y+1},{x-1,y+2}};
@@ -74,8 +116,11 @@ void viable(int x,int y)
     {
         char x1=a[i][0];
         char y1=a[i][1];
-        char z= (x1-x)*(y1-y)>0?'\\':'/';
-        if(arr[x][y]==arr[x1][y1] && (int)fabs(x-x1)==1)
+        int dx=x1-x,dy=y1-y;
+        char z= dx*dy>0?'\\':'/';
+        if(arr[x][y]!=arr[x1][y1])continue;
+        if(!check(x,y,dx,dy))continue;
+        if(fabs(dx)==1)
         {
             printf("\0337");
             printf("\033[%d;%dH", (x+x1)+2,1+(y+y1)*2);
@@ -83,14 +128,13 @@ void viable(int x,int y)
             fflush(stdout);
             printf("\0338");
         }
-        else if(arr[x][y]==arr[x1][y1])
+        else
         {
             printf("\0337");
             printf("\033[%d;%dH", (x+x1),4+(y+y1)*2);
             printf("%c"kw"|"kw"|"kw"|"kw"%c",z,z);
             fflush(stdout);
             printf("\0338");
-
         }
     }
     return;
@@ -107,6 +151,7 @@ int main()
         while(t==-1)
         {
             t=pin(x?'X':'O');
+            if(t==-10)return 0;
         }
         x=!x;
         viable(t/SIZE,t%SIZE);
