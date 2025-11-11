@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <string.h>
+#include <windows.h>
 #define SIZE 24 
 #define tw "\n\033[1B\033[1D"
 char arr[SIZE][SIZE];
@@ -97,6 +98,7 @@ void viable(int x,int y)
 }
 int main()
 {
+    SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, NULL);
     init();
     bool x=0;
     int i=10;
