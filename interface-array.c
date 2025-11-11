@@ -6,6 +6,7 @@
 #include <windows.h>
 #define SIZE 24 
 #define tw "\n\033[1B\033[1D"
+#define kw "\033[1B\033[1D"
 char arr[SIZE][SIZE];
 
 void init()
@@ -15,7 +16,6 @@ void init()
 }
 void print(char* s)
 {
-    int temp=strlen(s);
     for(int i=0;i<SIZE-1;i++)
     {
         printf("%c   ",s[i]);
@@ -69,8 +69,7 @@ int pin(char z)
 }
 void viable(int x,int y)
 {
-    char flag=0;
-    char a[8][2]={{x+2,y+1},{x+1,y+2},{x-2,y+1},{x-1,y-2},{x+2,y-2},{x+1,y-2},{x-2,y+1},{x-1,y+2}};
+    char a[8][2]={{x+2,y+1},{x+1,y+2},{x+2,y-1},{x+1,y-2},{x-1,y-2},{x-2,y-1},{x-2,y+1},{x-1,y+2}};
     for(int i=0;i<8;i++)
     {
         char x1=a[i][0];
@@ -84,11 +83,11 @@ void viable(int x,int y)
             fflush(stdout);
             printf("\0338");
         }
-        else if(arr[x][y]==arr[x1][y1] && fabs(x-x1)!=2)
+        else if(arr[x][y]==arr[x1][y1])
         {
             printf("\0337");
-            printf("\033[%d;%dH", (x+x1)+2,1+(y+y1)*2);
-            printf("%c"tw"-"tw"-"tw"-"tw"-"tw"-"tw"%c",z,z);
+            printf("\033[%d;%dH", (x+x1),4+(y+y1)*2);
+            printf("%c"kw"|"kw"|"kw"|"kw"%c",z,z);
             fflush(stdout);
             printf("\0338");
 
@@ -98,7 +97,6 @@ void viable(int x,int y)
 }
 int main()
 {
-    SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, NULL);
     init();
     bool x=0;
     int i=10;
