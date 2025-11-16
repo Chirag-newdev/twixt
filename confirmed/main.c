@@ -7,7 +7,7 @@ int main()
     memset(state,'0',sizeof(state));
     bool x=0;
     int i=10;
-    begin();
+    initialize();
     display();
     while(i--)
     {

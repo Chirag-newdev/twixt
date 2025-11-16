@@ -4,6 +4,12 @@
 #include <math.h>
 #include <string.h>
 #include <windows.h>
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define RESET   "\033[0m"
 #define SIZE 24 
 #define tw "\n\033[1B\033[1D"
 #define kw "\033[1B\033[1D"
@@ -11,8 +17,22 @@ char arr[SIZE][SIZE]={0};
 bool state[SIZE+1][SIZE+1]={0};
 void init()
 {
+        printf(GREEN
+        "  _________    _____  _____      _____      ____  ____    _________   \n"
+        " |  _   _  |  |_   _||_   _|    |_   _|    |_  _||_  _|  |  _   _  |  \n"
+        " |_/ | | \\_|    | | /\\ | |        | |        \\ \\  / /    |_/ | | \\_|  \n"
+        "     | |        | |/  \\| |        | |         > `' <         | |      \n"
+        "    _| |_       |   /\\   |       _| |_      _/ /'`\\ \\_      _| |_     \n"
+        "   |_____|      |__/  \\__|      |_____|    |____||____|    |_____|    \n"RESET
+    );
+    printf("\n");
+    printf("Player \033[1;94mO\033[0m: Connect " RED "LEFT" RESET " to " BLUE "RIGHT" RESET "\n");
+    printf("Player \033[1;94mX\033[0m: Connect " GREEN "TOP" RESET " to " MAGENTA "BOTTOM" RESET "\n");
+    printf("\n\nPlayer \033[1;94mO\033[0m goes first\npress Enter to begin the game\n ");
+    getchar();
     char(*ptr)[] = arr;
     memset(arr,'.',sizeof(arr));
+    return;
 }
 void print(char* s)
 {
@@ -68,6 +88,46 @@ int pin(char z)
         return -1;
     }
 }
+// void block(int x,int y,int dx,int dy)
+// {
+//     if(dx==1)
+//     {
+//         {
+//             state[x+1][y]=state[x+1][y+dy/2]=1;
+//         }
+//     }
+//     else if(dx==-1)
+//     {
+//         x--;
+//         state[x+1][y]=state[x+1][y+dy/2]=1;
+//     }
+//     else if(dx==2)
+//     {
+//         if(dy==1)state[x+dx/2][y]=state[x][y]=1;
+//     }
+//     else state[x+dx/2][y]=state[x][y]=1;
+// }
+// bool check(int x,int y,int dx,int dy)
+// {
+//     if (dx == 1)
+//     {
+//         if (state[x+1][y] || state[x+1][y+dy/2]) return false;
+//     }
+//     else if (dx == -1)
+//     {
+//         if (state[x][y] || state[x][y+dy/2]) return false;
+//     }
+//     else if (dx == 2)
+//     {
+//         if (state[x+1][y] || state[x+1][y+dy/2]) return false;
+//     }
+//     else if (dx == -2)
+//     {
+//         if (state[x-1][y] || state[x-1][y+dy/2]) return false;
+//     }
+//     block(x, y, dx, dy);
+//     return true;
+// }
 void block(int x,int y,int dx,int dy)
 {
     if(dx==1)
@@ -108,7 +168,6 @@ bool check(int x,int y,int dx,int dy)
     block(x, y, dx, dy);
     return true;
 }
-
 void viable(int x,int y)
 {
     char a[8][2]={{x+2,y+1},{x+1,y+2},{x+2,y-1},{x+1,y-2},{x-1,y-2},{x-2,y-1},{x-2,y+1},{x-1,y+2}};

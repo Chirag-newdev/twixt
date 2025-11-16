@@ -10,9 +10,10 @@ void link(int x,int y)
         char y1=a[i][1];
         int dx=x1-x,dy=y1-y;
         char z= dx*dy>0?'\\':'/';
+        if((x1<0||x1>=SIZE) || (y1<0||y1>=SIZE))continue;
         if(arr[x][y]!=arr[x1][y1])continue;
         if(!check(x,y,dx,dy))continue;
-        if(fabs(dx)==1)
+        if(abs(dx)==1)
         {
             printf("\0337");
             printf("\033[%d;%dH", (x+x1)+2,1+(y+y1)*2);
@@ -23,8 +24,8 @@ void link(int x,int y)
         else
         {
             printf("\0337");
-            printf("\033[%d;%dH", (x+x1),4+(y+y1)*2);
-            printf("%c"kw"|"kw"|"kw"|"kw"%c",z,z);
+            printf("\033[%d;%dH", (x+x1+1),4+(y+y1)*2);
+            printf("%c"kw"|"kw"%c",z,z);
             fflush(stdout);
             printf("\0338");
         }
