@@ -11,8 +11,8 @@ int main()
     display();
     while(i--)
     {
-        int t=-1;
-        while(t==-1)
+        int t=0;
+        while(t<=0)
         {
             t=pin(x?'X':'O',t);
             if(t==-10)return 0;
