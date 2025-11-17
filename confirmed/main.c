@@ -6,7 +6,7 @@ int main()
     memset(arr,'.',sizeof(arr));
     memset(state,'0',sizeof(state));
     bool x=0;
-    int i=10;
+    int i=40;
     initialize();
     display();
     while(i--)
