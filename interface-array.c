@@ -88,46 +88,6 @@ int pin(char z)
         return -1;
     }
 }
-// void block(int x,int y,int dx,int dy)
-// {
-//     if(dx==1)
-//     {
-//         {
-//             state[x+1][y]=state[x+1][y+dy/2]=1;
-//         }
-//     }
-//     else if(dx==-1)
-//     {
-//         x--;
-//         state[x+1][y]=state[x+1][y+dy/2]=1;
-//     }
-//     else if(dx==2)
-//     {
-//         if(dy==1)state[x+dx/2][y]=state[x][y]=1;
-//     }
-//     else state[x+dx/2][y]=state[x][y]=1;
-// }
-// bool check(int x,int y,int dx,int dy)
-// {
-//     if (dx == 1)
-//     {
-//         if (state[x+1][y] || state[x+1][y+dy/2]) return false;
-//     }
-//     else if (dx == -1)
-//     {
-//         if (state[x][y] || state[x][y+dy/2]) return false;
-//     }
-//     else if (dx == 2)
-//     {
-//         if (state[x+1][y] || state[x+1][y+dy/2]) return false;
-//     }
-//     else if (dx == -2)
-//     {
-//         if (state[x-1][y] || state[x-1][y+dy/2]) return false;
-//     }
-//     block(x, y, dx, dy);
-//     return true;
-// }
 void block(int x,int y,int dx,int dy)
 {
     if(abs(dx)==1)state[x+(dx>0)][y+(dy>0)]=state[x+(dx>0)][y+(dy>0)+dy/2]=1;
@@ -136,25 +96,12 @@ void block(int x,int y,int dx,int dy)
 }
 bool check(int x,int y,int dx,int dy)
 {
-    if (dx == 1)
-    {
-        if (state[x+1][y] || state[x+1][y+dy/2]) return false;
-    }
-    else if (dx == -1)
-    {
-        if (state[x][y] || state[x][y+dy/2]) return false;
-    }
-    else if (dx == 2)
-    {
-        if (state[x+1][y] || state[x+1][y+dy/2]) return false;
-    }
-    else if (dx == -2)
-    {
-        if (state[x-1][y] || state[x-1][y+dy/2]) return false;
-    }
+    if(abs(dx)==1)if(state[x+(dx>0)][y+(dy>0)] || state[x+(dx>0)][y+(dy>0)+dy/2])return 0;
+    else if(abs(dx)==2)if(state[x+(dx>0)-(dx<0)][y+(dy>0)] || state[x+(dx>0)*dx][y+(dy>0)])return 0;
     block(x, y, dx, dy);
     return true;
 }
+
 void viable(int x,int y)
 {
     char a[8][2]={{x+2,y+1},{x+1,y+2},{x+2,y-1},{x+1,y-2},{x-1,y-2},{x-2,y-1},{x-2,y+1},{x-1,y+2}};
@@ -164,9 +111,10 @@ void viable(int x,int y)
         char y1=a[i][1];
         int dx=x1-x,dy=y1-y;
         char z= dx*dy>0?'\\':'/';
+        if((x1<0||x1>=SIZE) || (y1<0||y1>=SIZE))continue;
         if(arr[x][y]!=arr[x1][y1])continue;
         if(!check(x,y,dx,dy))continue;
-        if(fabs(dx)==1)
+        if(abs(dx)==1)
         {
             printf("\0337");
             printf("\033[%d;%dH", (x+x1)+2,1+(y+y1)*2);
@@ -177,14 +125,15 @@ void viable(int x,int y)
         else
         {
             printf("\0337");
-            printf("\033[%d;%dH", (x+x1),4+(y+y1)*2);
-            printf("%c"kw"|"kw"|"kw"|"kw"%c",z,z);
+            printf("\033[%d;%dH", (x+x1+1),4+(y+y1)*2);
+            printf("%c"kw"|"kw"%c",z,z);
             fflush(stdout);
             printf("\0338");
         }
     }
     return;
 }
+
 int main()
 {
     init();

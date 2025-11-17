@@ -14,7 +14,7 @@ int main()
         int t=-1;
         while(t==-1)
         {
-            t=pin(x?'X':'O');
+            t=pin(x?'X':'O',t);
             if(t==-10)return 0;
         }
         x=!x;
