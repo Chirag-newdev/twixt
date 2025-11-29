@@ -7,5 +7,5 @@
 #include <math.h>
 #include <stdbool.h>
 extern char arr[SIZE][SIZE];
-extern bool state[SIZE+1][SIZE+1];
+extern bool state[SIZE+5][SIZE+5];
 #endif

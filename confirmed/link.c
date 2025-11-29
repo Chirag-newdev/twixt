@@ -24,8 +24,8 @@ void link(int x,int y)
         else
         {
             printf("\0337");
-            printf("\033[%d;%dH", (x+x1+1),4+(y+y1)*2);
-            printf("%c"kw"|"kw"%c",z,z);
+            printf("\033[%d;%dH", (x+x1),4+(y+y1)*2);
+            printf("%c"kw"|"kw"|"kw"|"kw"%c",z,z);
             fflush(stdout);
             printf("\0338");
         }

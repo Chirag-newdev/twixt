@@ -4,7 +4,7 @@ bool state[SIZE+1][SIZE+1]={false};
 int main()
 {
     memset(arr,'.',sizeof(arr));
-    memset(state,'0',sizeof(state));
+    memset(state,0,sizeof(state));
     bool x=0;
     int i=40;
     initialize();

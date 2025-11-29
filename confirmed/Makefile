@@ -7,8 +7,8 @@ CC      = gcc
 CFLAGS  = -Wall -Wextra -Wpedantic -g -O0
 TARGET  = a.exe
 
-# Source and object files (auto-detects all .c files)
-SRC = $(wildcard *.c)
+# Source and object files (auto-detects all .c files except working.c)
+SRC = $(filter-out working.c, $(wildcard *.c))
 OBJ = $(SRC:.c=.o)
 
 # Default target — same as 'make run'
