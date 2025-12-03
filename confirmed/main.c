@@ -23,7 +23,7 @@ int main()
         link(t/SIZE,t%SIZE);
         update(t/SIZE,t%SIZE);
         int xyz=checkwin();
-        if(xyz)
+        if(xyz!=0)
         {
             system("cls");
             printf("\n\033[32mPlayer %s wins\033[0m\n\n",xyz<0?"\033[34mX\033[0m":"\033[31mO\033[0m");
