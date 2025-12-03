@@ -8,10 +8,10 @@ int main()
     memset(arr,'.',sizeof(arr));
     memset(state,0,sizeof(state));
     bool x=0;
-    int i=40;
+    int count=570;
     initialize();
     display();
-    while(i--)
+    while(count--)
     {
         int t=0;
         while(t<=0)
@@ -21,6 +21,14 @@ int main()
         }
         x=!x;
         link(t/SIZE,t%SIZE);
+        update(t/SIZE,t%SIZE);
+        int xyz=checkwin();
+        if(xyz)
+        {
+            system("cls");
+            printf("\n\033[32mPlayer %s wins\033[0m\n\n",xyz<0?"\033[34mX\033[0m":"\033[31mO\033[0m");
+            return 0;
+        }
     }
     return 0;
 }

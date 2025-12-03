@@ -3,7 +3,7 @@
 #define kw "\033[1B\033[1D"
 void link(int x,int y)
 {
-    char a[8][2]={{x+2,y+1},{x+1,y+2},{x+2,y-1},{x+1,y-2},{x-1,y-2},{x-2,y-1},{x-2,y+1},{x-1,y+2}};
+    char a[8][2]={{x-2,y+1},{x-1,y+2},{x+1,y+2},{x+2,y+1},{x+2,y-1},{x+1,y-2},{x-1,y-2},{x-2,y-1}};
     for(int i=0;i<8;i++)
     {
         char x1=a[i][0];
@@ -30,6 +30,8 @@ void link(int x,int y)
             fflush(stdout);
             printf("\0338");
         }
+        ss[x][y][i]=1;
+        ss[x1][y1][(i+4)%8]=1;
     }
     return;
 }

@@ -6,4 +6,5 @@
 #include "display.h"
 #include "link.h"
 #include "begin.h"
+#include "checkwin.h"
 #endif
