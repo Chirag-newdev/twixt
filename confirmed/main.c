@@ -1,6 +1,8 @@
 #include "depn.h"
 char arr[SIZE][SIZE]={0};
-bool state[SIZE+1][SIZE+1]={false};
+bool state[SIZE+5][SIZE+5]={false};
+char ss[SIZE][SIZE][8]={0};
+char wonq[SIZE][SIZE]={0};
 int main()
 {
     memset(arr,'.',sizeof(arr));

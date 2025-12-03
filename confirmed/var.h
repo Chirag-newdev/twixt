@@ -8,4 +8,6 @@
 #include <stdbool.h>
 extern char arr[SIZE][SIZE];
 extern bool state[SIZE+5][SIZE+5];
+extern char wonq[SIZE][SIZE];
+extern char ss[SIZE][SIZE][8];
 #endif
