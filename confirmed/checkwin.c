@@ -1,5 +1,4 @@
 #include "checkwin.h"
-
 int update(int x, int y)
 {
     if(x < 0 || x >= SIZE || y < 0 || y >= SIZE) return 0;
@@ -41,7 +40,6 @@ int update(int x, int y)
             }
         }
     }
-
     if(wonq[x][y] != 0)
     {
         for(int i = 0; i < 8; i++)
@@ -63,7 +61,6 @@ int update(int x, int y)
     }
     return 0;
 }
-
 int checkwin()
 {
     for(int i = 1; i < SIZE-1; i++)
