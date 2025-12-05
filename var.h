@@ -1,6 +1,6 @@
 #ifndef Gl_H
 #define Gl_H
-#define SIZE 24 
+#define SIZE 8 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
