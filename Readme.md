@@ -1,9 +1,18 @@
 # TwixT – Phase 1
 
-Turn-based TwixT variant in C. Players place pins, automatically form knight-move links, and win by completing a border-to-border chain.
+**UNDER THE GNU PUBLIC LICENSE - FREE FOR USE**
 
 ---
 
+Turn-based TwixT variant in C. Players place pins, automatically form knight-move links, and win by completing a border-to-border chain.
+
+---
+## UNIQUE FEATURES
+
+THIS VERSION USES ANSI ESCAPE SEQUENCES TO NAVIGATE THE TERMINAL.
+
+(Although it has some issues in minimised windows, it is the most time-efficient way of modifying the console without rerendering)
+---
 ## Objectives
 - 24×24 fixed board
 - O connects **TOP → BOTTOM**
@@ -38,6 +47,11 @@ Game ends immediately when either is achieved.
 
 ## Build (Windows)
 Requires `make` and GCC.
+
+## Build mac/linux 
+change the target file from a.exe to a.out for LINUX / a.app for mac
+the rest is same
+requires GCC and MAKE
 
 ```bash
 make       # build and run
