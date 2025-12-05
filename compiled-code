@@ -1,3 +1,6 @@
+/*
+THIS FILE HAS ALL THE CODE OF THIS REPO IN ITS ENTIRITY FO YOUR REFERENCE WITH SEPERATOR - ==================()====================
+*/
 ===== begin.h =====
 #ifndef B_H
 #define B_H
@@ -633,4 +636,5 @@ clean:
 
 # Phony targets
 .PHONY: all run debug clean
+
 
